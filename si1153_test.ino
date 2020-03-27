@@ -26,17 +26,17 @@ void setup() {
     si1153.param_set(Si1153::MEASRATE_L, 1);
     si1153.param_set(Si1153::MEASCOUNT_0, 5);
     si1153.param_set(Si1153::MEASCOUNT_1, 10);
-    si1153.param_set(Si1153::MEASCOUNT_2, 200);
+    si1153.param_set(Si1153::MEASCOUNT_2, 10);
 
-    si1153.param_set(Si1153::THRESHOLD0_L, 0x01);
-    si1153.param_set(Si1153::THRESHOLD0_H, 0x00);
+    si1153.param_set(Si1153::THRESHOLD0_L, 200);
+    si1153.param_set(Si1153::THRESHOLD0_H, 0);
 
     /*
      * IRQ_ENABLE
      */
     Wire.beginTransmission(Si1153::DEVICE_ADDRESS);
     Wire.write(Si1153::IRQ_ENABLE);
-    Wire.write(0B000000 >> 2);
+    Wire.write(0B001010 >> 2);
     Wire.endTransmission();
 
     /*
@@ -71,7 +71,7 @@ void loop() {
     data[1] = si1153.read_register(Si1153::DEVICE_ADDRESS, Si1153::HOSTOUT_1, 1);
     // data[2] = si1153.read_register(Si1153::DEVICE_ADDRESS, Si1153::HOSTOUT_2, 1);
 
-    Serial.println(si1153.get_int_from_bytes(data, sizeof(data)));
+    Serial.println(data[0]*256 + data[1]);
     
     delay(100);
 }
