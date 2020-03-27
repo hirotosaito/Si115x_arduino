@@ -1,0 +1,6 @@
+{
+    "board": "esp32:esp32:mhetesp32minikit",
+    "configuration": "FlashFreq=80,PartitionScheme=default,UploadSpeed=921600,DebugLevel=none",
+    "sketch": "si1153_test.ino",
+    "port": "COM24"
+}
